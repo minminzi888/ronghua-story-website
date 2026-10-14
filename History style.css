@@ -1,0 +1,486 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "宋体", sans-serif;
+    background-color: rgb(244, 240, 235);
+    color: #333;
+}
+
+/* 头部样式保持不变 */
+header {
+    background-color: #9C4A57;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    color: white;
+    background-image: url(images/logo1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    text-indent: -9999px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+header ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+header li {
+    display: inline;
+    margin-right: 1vw;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav ul {
+    gap: 2.5rem;
+}
+
+header nav ul li a {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #f4e8a9fd;
+}
+
+header nav ul li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #f4e8a9fd;
+    transition: width 0.3s ease;
+}
+
+header nav ul li a:hover::after {
+    width: 100%;
+}
+
+header nav ul li.active a {
+    color: #f4e8a9fd;
+    font-weight: 700;
+}
+
+header nav ul li.active a::after {
+    width: 100%;
+    background-color: #f4e8a9fd;
+}
+
+.menu {
+    display: none;
+}
+
+/* 内容区域样式 */
+.info {
+    height: 60vh;
+    line-height: 4;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-top: 100px;
+}
+
+.info p {
+    letter-spacing: 2px;
+    line-height: 3;
+    padding: 10px 10px 30px 20px;
+    text-align: left;
+    font-weight: bold;
+    text-indent: 40px;
+}
+
+.titles {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: baseline;
+    padding-left: 20px;
+}
+
+.titles img {
+    width: 5%;
+    height: auto;
+}
+
+.titles h2 {
+    font-size: 30px;
+    letter-spacing: 3px;
+    color: #393737;
+    font-family: "华文中宋", sans-serif;
+    margin: 5px 10px;
+}
+
+.cover {
+    background-image: url('images/history.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* 时间轴核心样式（红色主题调整） */
+.timeline-section {
+    max-width: 100%;
+    margin: 50px auto;
+    padding: 0 60px;
+    position: relative;
+    overflow: hidden; /* 确保红色线条不溢出容器 */
+}
+
+.timeline {
+    position: relative;
+    padding: 60px 0 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.timeline::-webkit-scrollbar {
+    display: none;
+}
+
+/* 红色时间轴线条（贯穿左右） */
+.timeline::after {
+    content: '';
+    position: absolute;
+    height: 4px; /* 线条粗细 */
+    background-color: #9C4A57; /* 红色主题色 */
+    left: -2000px; /* 向左延伸超出容器，视觉上贯穿左右 */
+    right: -2000px; /* 向右延伸超出容器 */
+    top: 30px;
+    z-index: 1;
+}
+
+/* 卡片样式 */
+.timeline-item {
+    width: 280px;
+    flex-shrink: 0;
+    animation: fadeIn 0.8s ease-out;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+/* 红色圆点（与每个卡片对应） */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px; /* 圆点直径 */
+    height: 20px;
+    background-color: #9C4A57; /* 红色填充 */
+    border: 3px solid white; /* 白色边框突出圆点 */
+    top: -40px; /* 与时间轴线条对齐 */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: 2; /* 置于时间轴线条上方 */
+    box-shadow: 0 0 0 2px rgba(156, 74, 87, 0.2); /* 红色阴影增强层次感 */
+}
+
+.timeline-content {
+    padding: 15px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    margin-top: 30px;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+}
+
+.timeline-content h3 {
+    font-family: "华文中宋", SimHei, sans-serif;
+    color: #9C4A57; /* 标题红色 */
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.timeline-content p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+/* 图片样式 */
+.image-container {
+    margin-top: 12px;
+    position: relative;
+}
+
+.zoomable-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.zoomable-image:hover {
+    transform: scale(1.02);
+}
+
+.image-source {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* 滑动按钮样式 */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #9C4A57;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background-color: #7a3a45;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-left {
+    left: 10px;
+}
+
+.scroll-right {
+    right: 10px;
+}
+
+/* 模态框样式保持不变 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #9C4A57;
+}
+
+.modal-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-height: 70vh;
+}
+
+#modalImage {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.1s ease;
+    transform-origin: center center;
+}
+
+.image-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 2002;
+}
+
+.control-btn {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background-color: #9C4A57;
+    transform: scale(1.1);
+}
+
+.image-info {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    margin-top: 10px;
+}
+
+#imageSource {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.zoom-instruction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+footer {
+    background-color: rgb(53, 52, 52);
+    color: white;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 50px;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    header ul {
+        display: none;
+    }
+
+    .menu {
+        display: block;
+        background-color: transparent;
+        color: white;
+        font-size: 35px;
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .cover {
+        font-size: 3em;
+        height: 60vh;
+    }
+
+    .timeline-item {
+        width: 240px;
+    }
+    
+    .scroll-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .timeline-section {
+        padding: 0 40px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

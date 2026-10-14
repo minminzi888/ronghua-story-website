@@ -1,0 +1,562 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+  background-color: rgb(244, 240, 235);
+    font-family: "宋体", sans-serif;
+    /* background-image: url(images/背景3.png); */
+    color: #333;
+}
+header {
+    background-color: #9C4A57;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    /* 新增：Flex 布局，让子元素水平排列 */
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: space-between; /* 左右分布（Logo 左，菜单右） */
+}
+header h1 {
+   color: white;
+    /* 去掉绝对定位相关属性 */
+    /* position: absolute; left: 0; top: 0; line-height: 85px; */
+    background-image: url(images/logo1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:150px;
+    height: 150px;
+    text-indent: -9999px;
+    /* 新增：Flex 垂直居中 */
+    display: flex;
+    align-items: center;
+    padding-left: 20px; /* 调整 Logo 左边距（可选） */
+}
+
+header ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+
+}
+header li{
+    display: inline;
+    margin-right: 1vw;
+}
+header a{
+
+    color: white;
+    text-decoration: none;
+}
+
+/* 菜单按钮（hover 缩放动画） */
+header .menu-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* 动画过渡 */
+}
+
+header .menu-btn:hover {
+  transform: scale(1.1); /* 悬停时轻微放大 */
+}
+
+/* Logo 区域（控制尺寸与居中） */
+header .logo h1 {
+  background: url("images/logo2.png") no-repeat center/contain; /* 背景图适配 */
+  width: 60px;   /* 调整宽度，让 Logo 更精致 */
+  height: 60px;
+  text-indent: -9999px; /* 隐藏文字，只显示背景图 */
+  margin: 0 auto; /* 使 Logo 在中间区域居中（配合 header 的 justify-content） */
+}
+header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem; /* 用 gap 控制菜单项间距，比 margin 更简洁 */
+}
+
+/* 导航链接基础样式 */
+header nav ul li a {
+  text-decoration: none; /* 去掉默认下划线 */
+  color: #fff;           /* 文字白色 */
+  font-size: 1rem;
+  font-weight: 500;      /* 字体中等加粗 */
+  padding: 0.5rem 0;     /* 上下内边距，点击区域更大 */
+  position: relative;    /* 为下划线动画做定位 */
+  transition: color 0.3s ease; /* 文字颜色过渡 */
+}
+
+/* 导航链接悬停效果：文字变色 + 下划线展开 */
+header nav ul li a:hover {
+  color: #f4e8a9fd; /* 悬停时金色高亮（可根据品牌调整） */
+}
+
+/* 下划线动画（伪元素实现） */
+header nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;          /* 初始宽度为0 */
+  height: 2px;       /* 下划线高度 */
+  background-color: #f4e8a9fd; /* 下划线颜色（与 hover 文字一致） */
+  transition: width 0.3s ease; /* 宽度过渡动画 */
+}
+
+/* 悬停时下划线从左到右展开 */
+header nav ul li a:hover::after {
+  width: 100%; /* 宽度展开至100% */
+}
+
+/* ========== 当前页面高亮（活跃状态） ========== */
+header nav ul li.active a {
+  color: #f4e8a9fd;       /* 文字金色高亮 */
+  font-weight: 700;     /* 字体加粗，强化视觉 */
+}
+
+/* 下划线常驻（当前页始终有下划线） */
+header nav ul li.active a::after {
+  width: 100%;
+  background-color: #f4e8a9fd;
+}
+.menu{
+    display: none;
+}
+.cover{
+  background-image: url('images/斜倚熏笼图轴.png');
+    /* 2. 背景适配：覆盖全屏且保持比例（cover=裁剪边缘，contain=完整显示） */
+    background-size: cover;
+    /* 3. 背景位置：居中显示 */
+    background-position: center -30%;  
+   
+    /* 5. 容器高度：占满屏幕视口（100vh=100%屏幕高度） */
+    height: 80vh;
+    /* 6. 弹性布局：让子元素（文字）水平+垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+.horizontal-line {
+  width: 90%; /* 可根据需要调整宽度，如 80% 更美观 */
+  max-width: 1200px; /* 限制最大宽度，避免在宽屏上过宽 */
+  height: 3px;
+  background-color: #9C4A57;
+  margin: -20px 55px 50px ; /* 清除默认margin，避免影响居中 */
+}
+.titles{
+ height: 20vh;
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  position: relative; /* 父容器相对定位 */
+  margin: 5vh;
+}
+.titles img{
+  width:5%;
+  height: auto;
+}
+.titles h2{
+font-size: 30px;
+letter-spacing: 3px;
+color: #393737;
+font-family: "华文中宋", sans-serif;
+margin: 5px 10px ;
+}
+
+
+
+.source-declaration {
+            max-width: 800px;
+            margin: 20px 200px;
+            padding: 20px;
+            border-left: 4px solid #9d9d9d; /* 左侧灰色竖线 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #333;
+            background-color: rgba(83, 81, 81, 0.1);
+        }
+        
+        .source-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .source-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .source-item {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .source-item::before {
+            content: "•"; /* 圆点符号 */
+            position: absolute;
+            left: 8px;
+            color: #666; /* 圆点颜色 */
+        }
+        
+        .source-link {
+            color: #165DFF; /* 链接蓝色 */
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .source-link:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright-hint {
+            color: #777;
+        }
+
+/* 轮播容器样式 */
+.carousel-container {
+    width: 60%;
+    max-width: 800px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    position: relative; /* 保留，为伪元素定位做准备 */
+    overflow: hidden;
+    margin: 40px auto;
+    /* 移除原背景图相关属性，移至伪元素 */
+}
+
+/* 伪元素承载背景图并设置透明度 */
+.carousel-container::before {
+    content: ""; /* 伪元素必备 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(images/背景5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-origin: border-box;
+    opacity: 0.6; /* 透明度，0-1可调，0.6为半透明偏实 */
+    z-index: -1; /* 确保背景在轮播内容下方 */
+    border-radius: 20px; /* 同步容器圆角，避免背景溢出圆角 */
+}
+
+/* 标题样式 */
+.carousel-title {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* 轮播内容区域 */
+.carousel-content {
+    
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+/* 每个步骤面板样式 */
+.step-panel {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-card {
+    border-radius: 0px;
+    padding: 30px;
+    display: flex;
+    gap: 50px; /* 控制卡片内部元素的间距，若需调整也可修改 */
+    align-items: center;
+    margin-bottom: 50px; /* 新增：控制卡片之间的垂直间距，数值可根据需求调整 */
+}
+
+/* 图片样式 */
+.step-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* 文字内容样式 */
+.step-text {
+    font-weight: bold;
+    flex: 1;
+}
+
+.step-title {
+    color: #284c78;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.step-description {
+    color: black;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* 按钮样式 */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.nav-btn {
+    background-color: #8ca1c4;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #3862a1;
+    transform: translateY(-2px);
+}
+
+.prev-btn:disabled,
+.next-btn:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 指示器样式 */
+.indicators {
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+    background-color: #536b8f;
+}
+
+/* 详情按钮样式 */
+.detail-btn {
+    margin-top: 15px;
+    background-color: rgb(16, 48, 93);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.detail-btn:hover {
+    background-color: #4280e6;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    /* 去掉 justify-content 和 align-items，避免内容居中导致顶部被截断 */
+    /* justify-content: center;
+    align-items: center; */
+    z-index: 1000;
+    /* 容器本身不需要滚动，改为让内容区域滚动 */
+    /* overflow-y: auto; */
+    padding: 30px 0; /* 上下留 padding，避免内容贴边 */
+}
+
+.modal-content {
+    background-color: #F5F0E8;
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+    box-shadow: 0 5px 20px rgba(156, 74, 87, 0.15);
+    /* 关键：让内容容器支持滚动，限制最大高度为屏幕的80% */
+    max-height: 80vh; /* 视口高度的80%，避免内容过长超出屏幕 */
+    overflow-y: auto; /* 内容超出时显示滚动条 */
+    margin: 0 auto; /* 水平居中 */
+}
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #9C4A57; /* 主色关闭按钮 */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #6B2F3A; /* 深酒红hover色 */
+    transform: rotate(90deg); /* 轻微旋转动画，增加交互感 */
+}
+
+/* 步骤图文布局核心样式 */
+.modal-step {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* 图文间距 */
+    margin-bottom: 35px; /* 步骤之间的间距 */
+    padding-bottom: 35px;
+    border-bottom: 1px solid rgba(156, 74, 87, 0.1); /* 淡红色分隔线 */
+}
+
+/* 最后一个步骤去掉分隔线 */
+.modal-step:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.step-image {
+    flex: 0 0 35%; /* 图片固定占比35% */
+    height: 180px; /* 统一图片高度，保持整齐 */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 图片裁剪适配，不拉伸 */
+    transition: transform 0.5s ease;
+}
+
+/* 图片hover轻微放大，增加交互感 */
+.step-image:hover img {
+    transform: scale(1.03);
+}
+
+.step-text {
+    flex: 1; /* 文字占剩余空间 */
+}
+
+.modal-title {
+    color: #9C4A57; /* 主色标题，呼应绒花品牌 */
+    margin-bottom: 12px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.modal-description {
+    color: #5D4A3F; /* 深棕文字，复古且易读 */
+    line-height: 1.8;
+    margin-bottom: 0;
+    font-size: 15px;
+}
+        
+footer{
+    background-color: rgb(53, 52, 52);
+    color:white;
+    height: 60px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.8em;
+}
+
+
+
+
+
+@media screen and (max-width:768px){
+    header ul {
+        display: none;
+    }
+    header h1{
+        left:50%;
+        transform: translateX(-50%);
+    }
+    
+    .menu{
+        display:block;
+        background-color: transparent;
+        color:white;
+        font-size: 35px;
+        position: absolute;
+        top:15px;
+        left: 20px;
+        border:none;
+        cursor: pointer;
+    }
+     .cover {
+        font-size: 3em;
+        height: 60vh;
+    }
+    /* 响应式调整 */
+@media (max-width: 768px) {
+    .step-card {
+        flex-direction: column;
+    }
+    
+    .step-image {
+        width: 100%;
+        height: auto;
+    }
+    
+    .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+}

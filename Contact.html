@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 绒华物语</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Contact.css">
+</head>
+<body>
+    <header>
+        <button class="menu">&#9776;</button>
+        <h1>绒华物语</h1>
+       
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="history.html">发展历史</a></li>
+                <li><a href="Manufacturing process.html">制作工艺</a></li>
+                <li><a href="Innovation.html">传承创新</a></li>
+                <li><a href="Works display.html">作品展示</a></li>
+                <li class="active"><a href="Contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="contact-banner">
+            <h1>联系我们</h1>
+            <p>欢迎与我们交流，分享您对绒花的喜爱与见解</p>
+        </section>
+
+        <section class="contact-content">
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="icon">电话</div>
+                    <h3>联系电话</h3>
+                    <p>咨询热线：19260219443</p>
+                    <p>工作时间：9:00-18:00</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="icon">邮箱</div>
+                    <h3>电子邮箱</h3>
+                    <p>1414784178@qq.com</p>
+                    <p>欢迎来信咨询</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="icon">时间</div>
+                    <h3>工作时间</h3>
+                    <p>周一至周五：9:00-18:00</p>
+                    <p>周末及节假日：10:00-17:00</p>
+                </div>
+            </div>
+
+            <!-- 留言板区域 -->
+            <div class="message-board">
+                <h2>
+                    <img src="images/花标.png" alt="装饰图标" class="title-icon">
+                    留言板
+                </h2>
+                
+                <!-- 留言表单 -->
+                <form id="messageForm" class="message-form">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">邮箱 *</label>
+                        <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">联系电话</label>
+                        <input type="tel" id="phone" name="phone" placeholder="请输入您的联系电话（选填）">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">留言内容 *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="请输入您的留言..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">提交留言</button>
+                </form>
+
+                <!-- 留言列表 -->
+                <div class="messages-container">
+                    <h3>最新留言</h3>
+                    <div id="messagesList" class="messages-list">
+                        <!-- 留言将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <p>欢迎订阅</p>
+            <form>
+                <input type="email" placeholder="请输入你的Email" required>
+                <button type="submit">确认</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025[绒华物语]绒花工艺工作室</p>
+    </footer>
+
+    <script src="contact.js"></script>
+</body>
+</html>
+

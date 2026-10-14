@@ -1,0 +1,419 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "宋体", sans-serif;
+
+    color: #333;
+}
+header {
+    background-color: #9C4A57;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    /* 新增：Flex 布局，让子元素水平排列 */
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: space-between; /* 左右分布（Logo 左，菜单右） */
+}
+header h1 {
+   color: white;
+    /* 去掉绝对定位相关属性 */
+    /* position: absolute; left: 0; top: 0; line-height: 85px; */
+    background-image: url(images/logo1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:150px;
+    height: 150px;
+    text-indent: -9999px;
+    /* 新增：Flex 垂直居中 */
+    display: flex;
+    align-items: center;
+    padding-left: 20px; /* 调整 Logo 左边距（可选） */
+}
+header h2 {
+    color: white;
+    position: absolute; left: 100px;  line-height: 85px;
+    width:110px;
+}
+header ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+
+}
+header li{
+    display: inline;
+    margin-right: 1vw;
+}
+header a{
+
+    color: white;
+    text-decoration: none;
+}
+
+/* 菜单按钮（hover 缩放动画） */
+header .menu-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* 动画过渡 */
+}
+
+header .menu-btn:hover {
+  transform: scale(1.1); /* 悬停时轻微放大 */
+}
+
+/* Logo 区域（控制尺寸与居中） */
+header .logo h1 {
+  background: url("images/logo2.png") no-repeat center/contain; /* 背景图适配 */
+  width: 60px;   /* 调整宽度，让 Logo 更精致 */
+  height: 60px;
+  text-indent: -9999px; /* 隐藏文字，只显示背景图 */
+  margin: 0 auto; /* 使 Logo 在中间区域居中（配合 header 的 justify-content） */
+}
+header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem; /* 用 gap 控制菜单项间距，比 margin 更简洁 */
+}
+
+/* 导航链接基础样式 */
+header nav ul li a {
+  text-decoration: none; /* 去掉默认下划线 */
+  color: #fff;           /* 文字白色 */
+  font-size: 1rem;
+  font-weight: 500;      /* 字体中等加粗 */
+  padding: 0.5rem 0;     /* 上下内边距，点击区域更大 */
+  position: relative;    /* 为下划线动画做定位 */
+  transition: color 0.3s ease; /* 文字颜色过渡 */
+}
+
+/* 导航链接悬停效果：文字变色 + 下划线展开 */
+header nav ul li a:hover {
+  color: #f4e8a9fd; /* 悬停时金色高亮（可根据品牌调整） */
+}
+
+/* 下划线动画（伪元素实现） */
+header nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;          /* 初始宽度为0 */
+  height: 2px;       /* 下划线高度 */
+  background-color: #f4e8a9fd; /* 下划线颜色（与 hover 文字一致） */
+  transition: width 0.3s ease; /* 宽度过渡动画 */
+}
+
+/* 悬停时下划线从左到右展开 */
+header nav ul li a:hover::after {
+  width: 100%; /* 宽度展开至100% */
+}
+
+/* ========== 当前页面高亮（活跃状态） ========== */
+header nav ul li.active a {
+  color: #f4e8a9fd;       /* 文字金色高亮 */
+  font-weight: 700;     /* 字体加粗，强化视觉 */
+}
+
+/* 下划线常驻（当前页始终有下划线） */
+header nav ul li.active a::after {
+  width: 100%;
+  background-color: #f4e8a9fd;
+}
+.menu{
+    display: none;
+}
+.cover{
+  background-image: url('images/背景4.png');
+    /* 2. 背景适配：覆盖全屏且保持比例（cover=裁剪边缘，contain=完整显示） */
+    background-size: cover;
+    /* 3. 背景位置：居中显示 */
+    background-position: center -85%;  
+   
+    /* 5. 容器高度：占满屏幕视口（100vh=100%屏幕高度） */
+    height: 80vh;
+    /* 6. 弹性布局：让子元素（文字）水平+垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.works-section {
+    background-color: rgb(244, 240, 235);
+    padding: 4rem 2rem; /* 增加上下内边距，提升层次感 */
+    background-color: #fff;
+    max-width: 1400px; /* 限制最大宽度，避免大屏过宽 */
+    margin: 20px auto; /* 居中显示 */
+}
+
+/* 作品分类标题 */
+.works-section h2 {
+    font-size: 2rem;
+    color: #9C4A57; /* 与主色调呼应 */
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.05em; /* 文字间距，增强复古感 */
+}
+
+.horizontal-line {
+  width: 100%;
+  height: 3px; /* 线条高度即厚度 */
+  background-color: #9C4A57; /* 线条颜色 */
+  /* 可选：添加边距 */
+  margin: 60px 0;
+}
+
+/* 分类标签容器 */
+.category-tabs {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* 标签间距 */
+    margin-bottom: 3rem;
+    flex-wrap: wrap; /* 小屏幕自动换行 */
+    padding: 0 1rem;
+}
+
+/* 分类标签样式 */
+.category-tabs li {
+    cursor: pointer;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 20px; /* 圆角设计，更柔和 */
+    font-size: 1rem;
+    color: #666;
+    transition: all 0.3s ease; /* 平滑过渡 */
+    background-color: #f9f9f9;
+}
+
+/* 激活状态标签 */
+.category-tabs li.active {
+    border-color: #9C4A57;
+    background-color: #9C4A57;
+    color: #fff; /* 激活时文字变白 */
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(156, 74, 87, 0.2); /* 轻微阴影突出 */
+}
+
+/* 标签悬停效果 */
+.category-tabs li:hover:not(.active) {
+    border-color: #c88a95;
+    color: #9C4A57;
+    background-color: #fdf5f6;
+}
+
+/* 作品网格布局 */
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 强制一行3列 */
+    gap: 2.5rem; /* 图片间距，增强呼吸感 */
+    padding: 0 1rem;
+}
+
+/* 单个作品项样式 */
+.work-item {
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease; /* 整体悬浮动画 */
+    display: flex;
+    flex-direction: column; /* 垂直布局，确保文字在底部 */
+    height: 100%; /* 高度填满父容器，保持卡片整齐 */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); /* 基础阴影 */
+}
+
+/* 作品项悬浮效果 */
+.work-item:hover {
+    transform: translateY(-8px); /* 向上浮动 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* 加深阴影 */
+}
+
+/* 作品图片样式（统一大小） */
+.work-img {
+    width: 100%;
+    height: 300px; /* 固定高度，确保统一大小 */
+    object-fit: cover; /* 保持比例裁剪，避免变形 */
+    object-position: center; /* 居中显示主体内容 */
+    display: block;
+    transition: transform 0.5s ease; /* 图片缩放动画 */
+    cursor: zoom-in; /* 鼠标提示可放大 */
+}
+
+/* 图片悬浮缩放 */
+.work-item:hover .work-img {
+    transform: scale(1.05); /* 轻微放大，增强交互感 */
+}
+
+/* 作品来源文字 */
+.work-item p {
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: #666;
+    background-color: #fff;
+    margin-top: auto; /* 推至底部 */
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 图片放大模态框 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* 黑色半透明背景 */
+    z-index: 2000; /* 层级高于导航栏 */
+    display: none; /* 默认隐藏 */
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* 淡入淡出动画 */
+}
+
+/* 模态框显示状态 */
+.modal.show {
+    opacity: 1;
+}
+
+/* 放大后的图片 */
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh; /* 最大高度不超过屏幕 */
+    object-fit: contain;
+    border: 4px solid #fff; /* 白色边框突出图片 */
+    border-radius: 4px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease; /* 缩放动画 */
+}
+
+/* 图片加载完成后的缩放效果 */
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+/* 关闭按钮 */
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2010; /* 高于图片 */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 关闭按钮悬停效果 */
+.close-modal:hover {
+    color: #f4e8a9fd; /* 金色高亮，呼应主题 */
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: rotate(90deg); /* 旋转动画，增强交互 */
+}
+
+footer{
+    background-color: rgb(53, 52, 52);
+    color:white;
+    height: 60px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.8em;
+}
+
+
+
+
+
+@media screen and (max-width:768px){
+    header ul {
+        display: none;
+    }
+    header h1{
+        left:50%;
+        transform: translateX(-50%);
+    }
+    
+    .menu{
+        display:block;
+        background-color: transparent;
+        color:white;
+        font-size: 35px;
+        position: absolute;
+        top:15px;
+        left: 20px;
+        border:none;
+        cursor: pointer;
+    }
+     .cover {
+        font-size: 3em;
+        height: 60vh;
+    }
+    @media screen and (max-width: 1024px) {
+    .works-grid {
+        grid-template-columns: repeat(2, 1fr); /* 一行2列 */
+        gap: 2rem;
+    }
+    .work-img {
+        height: 260px; /* 适当缩小图片高度 */
+    }
+    .works-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* 响应式适配 - 手机设备（≤768px） */
+@media screen and (max-width: 768px) {
+    .works-grid {
+        grid-template-columns: 1fr; /* 一行1列 */
+        gap: 1.5rem;
+    }
+    .work-img {
+        height: 220px; /* 进一步缩小高度 */
+    }
+    .works-section {
+        padding: 2rem 1rem;
+    }
+    .works-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .category-tabs {
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+    }
+    .category-tabs li {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    .close-modal {
+        font-size: 2.5rem;
+        top: 15px;
+        right: 15px;
+    }
+  }
+}

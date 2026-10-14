@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>制作工艺</title>
+    <link rel="stylesheet" href="Manufacturing.css">
+    
+<style>
+        /* 视频播放器样式 */
+        .video-container {
+            max-width: 800px;
+            margin: 20px auto 40px;
+            padding: 20px;
+            background-image: url(images/背景3.png);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .custom-video {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            background-color: #000;
+        }
+        
+        .video-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            color: #333;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .progress-container {
+            flex: 1;
+            height: 6px;
+            background-color: #8a8888;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #9C4A57;
+            border-radius: 3px;
+            width: 0%;
+        }
+        
+        .progress-handle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: #9C4A57;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 3px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .progress-container:hover .progress-handle {
+            display: block;
+        }
+        
+        .control-btn {
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.2s;
+            /* padding: 5px; */
+            position: relative;
+        }
+        
+        .control-btn:hover {
+            color: #9C4A57;
+        }
+        
+        .volume-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .volume-popup {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            padding: 10px 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 10;
+            margin-bottom: 10px;
+        }
+        
+        .volume-popup.active {
+            display: block;
+        }
+        
+        .volume-slider {
+    width: 4px;
+    height: 120px;
+    cursor: pointer;
+    accent-color: #9C4A57;
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+}
+
+/* 自定义滑块圆点（缩小尺寸） */
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px; /* 原尺寸约14px，缩小为10px */
+    height: 10px;
+    border-radius: 50%;
+    background: #9C4A57;
+    border: 2px solid #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #9C4A57;
+    border: 2px solid #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+        
+        .time-display {
+            font-family: 'Arial', sans-serif;
+            white-space: nowrap;
+        }
+        
+        /* 响应式调整 */
+        @media screen and (max-width: 768px) {
+            .video-container {
+                margin: 20px;
+                padding: 15px;
+            }
+            
+            .volume-slider {
+                width: 60px;
+                height: 4px;
+                writing-mode: horizontal-tb;
+                -webkit-appearance: none;
+            }
+            
+            .volume-popup {
+                position: static;
+                transform: none;
+                margin-top: 5px;
+                padding: 5px 0;
+                background: transparent;
+                box-shadow: none;
+                display: block;
+            }
+            
+            .video-controls {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .time-display {
+                order: unset;
+                width: auto;
+                text-align: left;
+                margin-top: 0;
+            }
+            /* 移动端调整控件顺序 */
+            .play-pause {
+                order: 1;
+            }
+            .progress-container {
+                order: 2;
+                flex: 1 1 100%;
+                margin-top: 8px;
+            }
+            .time-display {
+                order: 3;
+            }
+            .volume-control {
+                order: 4;
+            }
+            .fullscreen-btn {
+                order: 5;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <button class="menu">&#9776;</button>
+        <h1>绒华物语</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="history.html">发展历史</a></li>
+                <li class="active"><a href="Manufacturing process.html">制作工艺</a></li>
+                <li><a href="Innovation.html">传承创新</a></li>
+                <li><a href="Works display.html">作品展示</a></li>
+                <li><a href="Contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<section class="cover">
+        <h1>制作工艺</h1>
+</section>
+
+    <main>
+        <div class="titles">
+            <img src="images/花标.png" alt="绒花图标" >
+            <h1>展示视频</h1>
+        </div>
+        <div class="horizontal-line"></div><!--红色横线-->
+        <!-- 视频播放器区域 -->
+        <div class="video-container">
+            <video class="custom-video">
+                <source src="images/工艺视频.mp4" type="video/mp4">
+                您的浏览器不支持HTML5视频播放
+            </video>
+            <!-- 调整控件顺序：播放按钮 → 进度条 → 时间显示 → 音量控件 → 全屏按钮 -->
+            <div class="video-controls">
+                <button class="control-btn play-pause" title="播放/暂停">▶</button>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                    <div class="progress-handle"></div>
+                </div>
+                <span class="time-display">0:00 / 0:00</span>
+                <div class="volume-control">
+                    <button class="control-btn volume-btn" title="音量">🔊</button>
+                    <div class="volume-popup">
+                        <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" orient="vertical">
+                    </div>
+                </div>
+                <button class="control-btn fullscreen-btn" title="全屏">⛶</button>
+            </div>
+        </div>
+        
+        <div class="source-declaration">
+        <h3 class="source-title">来源声明</h3>
+        <ul class="source-list">
+            <li class="source-item">创作者：@匠人集(B站知名UP主)</li>
+            <li class="source-item">原发布平台：哔哩哔哩</li>
+            <li class="source-item">原视频链接：<a href="https://www.bilibili.com/video/BV1fP4y1e7J1/?spm_id_from=333.1391.0.0&vd_source=b02e2863cee143160a7564d77571526d" class="source-link">点击跳转 ➔</a></li>
+        </ul>
+    </div>
+    
+      <div class="titles">
+            <img src="images/花标.png" alt="绒花图标" >
+            <h1>制作步骤</h1>
+        </div>
+ <div class="horizontal-line"></div><!--红色横线-->
+<div class="carousel-container">
+        <!-- <h1 class="carousel-title">绒花工艺流程</h1> -->
+        
+        <div class="carousel-content">
+            <!-- 步骤一 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/炼丝.jpg" 
+                         alt="炼丝" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤一：炼丝</h2>
+                        <p class="step-description">将整支蚕丝扒松后，放入冷水中浸泡一天。之后用碱水将其煮熟，时间不宜太
+长，以防煮得过烂。煮熟后的蚕丝称为"熟绒"，具有柔和、坚挺、不易倒毛的特点。黄铜
+丝要用木炭的文火烧至退火软化，使其变得柔软便于操作。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤二 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/染色.jpg" 
+                         alt="染色" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤二：染色</h2>
+                        <p class="step-description">根据要制作的绒花产品的色彩需要进行染色，色丝一般多达几十种色彩。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤三 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/晾晒.jpg" alt="晾晒" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤三：晾晒</h2>
+                        <p class="step-description">将染色后的丝绒套在竹竿上在阳光下晾晒，期间必须经常翻动，并使其保持绷
+直。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤四 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/1.jpg" alt="劈绒" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤四：劈绒</h2>
+                        <p class="step-description">将熟丝绷直，扯断扎丝后分把。通过"揭"和"掀"的手法，顺着脉络走向将丝分劈成独立小份，直至取得所需线量。过程中需
+手捏紧，一手扯丝，以防缠绕打结。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤五（带详情） -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/2.jpg" alt="勾条" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤五：勾条</h2>
+                        <p class="step-description">又分为梳绒、夹铜丝、剪绒条、对绒、搓绒条五步</p>
+                        <button class="detail-btn" data-modal="modal5">查看详情</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤六 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/6.jpg" alt="打尖" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤六：打尖</h2>
+                        <p class="step-description">左手捻转绒条，右手持打尖剪配合修剪，双手频率需一致。此步要求极高:剪刀角度与力度须精准，方能一次成型，避免破坏
+蓬松感。剪口抵铜丝为"打全尖"，未抵铜丝为"打半尖"。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤七（带详情） -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/7.jpg" alt="传花" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤七：传花</h2>
+                        <p class="step-description">传花步骤分"毛绒款"与"烫平款"两类操作</p>
+                        <button class="detail-btn" data-modal="modal7">查看详情</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤八 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/整型.png" alt="整型" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤八：整型</h2>
+                        <p class="step-description">对组合好的绒花进行最后的整理塑形，调整各部分比例，确保形态美观。匠人常用指尖轻轻揉搓绒丝，使其更加蓬松自然。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤九 -->
+            <div class="step-panel">
+                <div class="step-card">
+                    <img src="display images/装配.png" alt="装配" class="step-image">
+                    <div class="step-text">
+                        <h2 class="step-title">步骤九：装配</h2>
+                        <p class="step-description">最后用丝线将花朵与叶子组装到一起，同时可用不同的花蕊珍珠以及挂坠等进行修饰点缀，最终得到想要的造型。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                <span>←</span> 上一步
+            </button>
+            
+            <div class="indicators" id="indicators">
+                <!-- 指示器将通过JS动态生成 -->
+            </div>
+            
+            <button class="nav-btn next-btn" id="nextBtn">
+                下一步 <span>→</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 第五步详情弹窗 -->
+   <div class="modal" id="modal5">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        
+        <!-- 步骤1：梳绒 -->
+        <div class="modal-step">
+            <div class="step-image">
+                <!-- 替换为你的梳绒步骤图片（建议尺寸 400x300，复古质感） -->
+                <img src="display images/2.jpg" alt="梳绒步骤：固定丝线并梳理蓬松">
+            </div>
+            <div class="step-text">
+                <h3 class="modal-title">1.梳绒</h3>
+                <p class="modal-description">
+                    将丝线组用活结固定在细杆上，调整宽度后夹于梳绒板。随后一手夹丝，一手喷水并整理，用刷子反复斜刷丝线正反面，同时配合手指梳理。过程中需协调手部动作，直至绒线蓬松。
+                </p>
+            </div>
+        </div>
+
+        <!-- 步骤2：夹铜丝 -->
+        <div class="modal-step">
+            <div class="step-image">
+                <img src="display images/3.jpg" alt="夹铜丝步骤：对折铜丝夹住绒排">
+            </div>
+            <div class="step-text">
+                <h3 class="modal-title">2.夹铜丝</h3>
+                <p class="modal-description">
+                    将排好宽度的绒底端固定，抽一根铜丝对折后夹住绒排。双手捏住铜丝两端，一顿一捻并反向旋转，形成密集螺旋状，最后移至所需位置拧紧即可。托板将夹好的绒条托住，并向剪刀方向拖送，剪刀贴近绒排，将绒剪下。
+                </p>
+            </div>
+        </div>
+
+
+        <!-- 步骤3：对绒 -->
+        <div class="modal-step">
+            <div class="step-image">
+                <img src="display images/4.jpg" alt="对绒步骤：拉紧并反向捻转">
+            </div>
+            <div class="step-text">
+                <h3 class="modal-title">3.对绒</h3>
+                <p class="modal-description">
+                    左右双手拉紧绒条，往直面上对齐勾条分解步骤五，双手反向旋转左右双手拉紧绒条且向相反方向捻转使绒条呈粗螺旋状。
+                </p>
+            </div>
+        </div>
+
+        <!-- 步骤4：搓绒条 -->
+        <div class="modal-step">
+            <div class="step-image">
+                <img src="display images/5.jpg" alt="搓绒条步骤：搓擀至紧密挺直">
+            </div>
+            <div class="step-text">
+                <h3 class="modal-title">4.搓绒条</h3>
+                <p class="modal-description">
+                    将绒条放在木板上，用搓条板反复搓擀，直至绒条紧密。合格的成品需达到长短粗细、轻重厚薄、色彩搭配均匀一致，且绒在铜丝上挺直不弯。
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- 第七步详情弹窗 -->
+    <div class="modal" id="modal7">
+        <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        
+        <!-- 步骤1：梳绒 -->
+        <div class="modal-step">
+            <div class="step-image">
+                <!-- 替换为你的梳绒步骤图片（建议尺寸 400x300，复古质感） -->
+                <img src="display images/7.jpg" alt="梳绒步骤：固定丝线并梳理蓬松">
+            </div>
+            <div class="step-text">
+                <h3 class="modal-title">·毛绒款</h3>
+                <p class="modal-description">
+                     借助镊子给已经修剪好的绒条进行组合，并将其组装成自己想要的花朵，同时给叶子绒条造型组装粘合。
+                </p>
+            </div>
+        </div>
+
+        <!-- 步骤2：夹铜丝 -->
+        <div class="modal-step">
+            <div class="step-image">
+                <img src="display images/8.jpg" alt="夹铜丝步骤：对折铜丝夹住绒排">
+            </div>
+            <div class="step-text">
+                <h3 class="modal-title">·烫平款</h3>
+                <p class="modal-description">
+                    将修好的绒条用夹板烫平，上胶并晾干。随后根据模板为花瓣或叶子掐丝，粘合并再次加热加固，最后修剪掉多余部分。将所
+                有部件用丝线组装，并以花蕊、珍珠等点缀，完成最终造型。
+
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    </main>
+
+     <footer>
+        <p>©2025[绒华物语]绒花工艺工作室</p>
+    </footer>   
+
+<script>
+        // 视频播放器功能实现
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.custom-video');
+            const playPauseBtn = document.querySelector('.play-pause');
+            const progressBar = document.querySelector('.progress-bar');
+            const progressContainer = document.querySelector('.progress-container');
+            const progressHandle = document.querySelector('.progress-handle');
+            const volumeBtn = document.querySelector('.volume-btn');
+            const volumeSlider = document.querySelector('.volume-slider');
+            const volumePopup = document.querySelector('.volume-popup');
+            const timeDisplay = document.querySelector('.time-display');
+            const fullscreenBtn = document.querySelector('.fullscreen-btn');
+            
+            // 播放/暂停功能
+            playPauseBtn.addEventListener('click', togglePlay);
+            video.addEventListener('click', togglePlay);
+            
+            function togglePlay() {
+                if (video.paused || video.ended) {
+                    video.play();
+                    playPauseBtn.textContent = '⏸';
+                } else {
+                    video.pause();
+                    playPauseBtn.textContent = '▶';
+                }
+            }
+            
+            // 进度条更新
+            video.addEventListener('timeupdate', updateProgress);
+            
+            function updateProgress() {
+                const percent = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = percent + '%';
+                progressHandle.style.left = percent + '%';
+                
+                // 更新时间显示
+                const currentTime = formatTime(video.currentTime);
+                const duration = formatTime(video.duration);
+                timeDisplay.textContent = `${currentTime} / ${duration}`;
+            }
+            
+            // 格式化时间（转换为分:秒格式）
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const minutes = Math.floor(seconds / 60);
+                seconds = Math.floor(seconds % 60);
+                return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            }
+            
+            // 点击进度条跳转
+            progressContainer.addEventListener('click', scrub);
+            
+            function scrub(e) {
+                const scrubTime = (e.offsetX / progressContainer.offsetWidth) * video.duration;
+                video.currentTime = scrubTime;
+            }
+            
+            // 拖拽进度条
+            let isDragging = false;
+            
+            progressHandle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const rect = progressContainer.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                const newTime = pos * video.duration;
+                
+                // 限制在0到视频时长之间
+                if (newTime >= 0 && newTime <= video.duration) {
+                    const percent = (newTime / video.duration) * 100;
+                    progressBar.style.width = percent + '%';
+                    progressHandle.style.left = percent + '%';
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    const percent = parseFloat(progressBar.style.width) / 100;
+                    video.currentTime = percent * video.duration;
+                }
+            });
+            
+            // 音量控制
+            volumeSlider.addEventListener('input', () => {
+                video.volume = volumeSlider.value;
+                updateVolumeIcon();
+            });
+            
+            volumeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                volumePopup.classList.toggle('active');
+            });
+            
+            // 点击其他地方关闭音量条
+            document.addEventListener('click', function(e) {
+                if (!volumePopup.contains(e.target) && e.target !== volumeBtn) {
+                    volumePopup.classList.remove('active');
+                }
+            });
+            
+            function toggleMute() {
+                video.muted = !video.muted;
+                updateVolumeIcon();
+            }
+            
+            function updateVolumeIcon() {
+                if (video.muted) {
+                    volumeBtn.textContent = '🔇';
+                } else if (video.volume < 0.5) {
+                    volumeBtn.textContent = '🔈';
+                } else {
+                    volumeBtn.textContent = '🔊';
+                }
+            }
+            
+            // 全屏功能
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            
+            function toggleFullscreen() {
+                const container = document.querySelector('.video-container');
+                
+                if (!document.fullscreenElement) {
+                    if (container.requestFullscreen) {
+                        container.requestFullscreen();
+                    } else if (container.webkitRequestFullscreen) { /* Safari */
+                        container.webkitRequestFullscreen();
+                    } else if (container.msRequestFullscreen) { /* IE11 */
+                        container.msRequestFullscreen();
+                    }
+                    fullscreenBtn.textContent = '⛌';
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) { /* Safari */
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { /* IE11 */
+                        document.msExitFullscreen();
+                    }
+                    fullscreenBtn.textContent = '⛶';
+                }
+            }
+            
+            // 监听全屏状态变化
+            document.addEventListener('fullscreenchange', updateFullscreenIcon);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+            document.addEventListener('msfullscreenchange', updateFullscreenIcon);
+            
+            function updateFullscreenIcon() {
+                if (document.fullscreenElement) {
+                    fullscreenBtn.textContent = '⛌';
+                } else {
+                    fullscreenBtn.textContent = '⛶';
+                }
+            }
+            
+            // 视频结束时重置播放按钮
+            video.addEventListener('ended', () => {
+                playPauseBtn.textContent = '▶';
+            });
+            
+            // 初始化音量图标
+            updateVolumeIcon();
+        });
+
+// 轮播功能实现
+        const carouselContent = document.querySelector('.carousel-content');
+        const panels = document.querySelectorAll('.step-panel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('indicators');
+        const indicators = [];
+        let currentIndex = 0;
+        const totalPanels = panels.length;
+        
+        // 初始化指示器
+        for (let i = 0; i < totalPanels; i++) {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (i === currentIndex) {
+                indicator.classList.add('active');
+            }
+            indicator.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarousel();
+            });
+            indicatorsContainer.appendChild(indicator);
+            indicators.push(indicator);
+        }
+        
+        // 更新轮播状态
+        function updateCarousel() {
+            carouselContent.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // 更新指示器状态
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+            
+            // 更新按钮状态
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalPanels - 1;
+        }
+        
+        // 按钮事件监听
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalPanels - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+        
+        // 弹窗功能实现
+        const detailBtns = document.querySelectorAll('.detail-btn');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        
+        // 打开弹窗
+        detailBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalId = btn.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                modal.style.display = 'flex';
+            });
+        });
+        
+        // 关闭弹窗
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal');
+                modal.style.display = 'none';
+            });
+        });
+        
+        // 点击弹窗外部关闭
+        window.addEventListener('click', (e) => {
+            modals.forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+        
+        // 初始化轮播
+        updateCarousel();
+    </script>
+</body>
+</html>

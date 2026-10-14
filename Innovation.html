@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传承创新</title>
+     <link rel="stylesheet" href="Innovation.css">
+</head>
+<body>
+    <header>
+        <button class="menu">&#9776;</button>
+        <h1>绒华物语</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="History.html">发展历史</a></li>
+                <li><a href="Manufacturing process.html">制作工艺</a></li>
+                <li class="active"><a href="Innovation.html">传承创新</a></li>
+                <li><a href="Works display.html">作品展示</a></li>
+                <li><a href="Contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="cover">
+        <h1>传承创新</h1>
+        </section>
+
+
+    <div class="titles">
+        <img src="images/花标.png" alt="绒花细节图" >
+        <h2>传承人</h2>
+    </div>
+ <!-- 主体内容：传承人介绍 -->
+    <main class="innovation-content">
+        <!-- 传承人标题 + 三人照片 -->
+    <div class="inheritors-header">
+  <div class="photo-item">
+    <img src="images/赵树宪.jpg" alt="赵树宪">
+     <img src="images/蔡志伟.png" alt="蔡志伟">
+      <img src="images/刘梅 征珊珊.png" alt="刘梅 征珊珊">
+  </div>
+  <div class="photo-wrapper">
+   <p class="name">赵树宪</p>
+   <p class="name">刘梅 征珊珊</p>
+   <p class="name">蔡志伟</p>
+  </div>  
+        </div>
+
+        <div class="titles1">
+                    <img src="images/花标.png" alt="绒花细节图" >
+                    <h2>简介</h2>
+            </div>
+
+        <!-- 传承人详情卡片 -->
+        <div class="inheritor-cards">
+            <!-- 赵树宪 -->
+            <article class="inheritor-card">
+                <img src="images/赵树宪1.png" alt="赵树宪" class="card-img">
+                <div class="card-text">
+                    <h3 class="card-name">赵树宪</h3>
+                    <p class="card-title">江苏省非遗“绒花制作技艺”传承人<br>南京梧翊凰非遗文化传播有限公司创始人</p>
+                    <p class="card-desc">
+                        赵树宪,1953年出生,江苏省非物质文化遗产“绒花制作技艺”代表性传承人。<br>
+                        1973年进入南京工艺制花厂做绒花学徒,从滚绣起步，后拜知名手艺人周家凤为师。<br>
+                        2006年南京绒花入选省级非遗,他成为“最后的绒花匠人”;2008年在南京民俗博物馆设工作室。<br>
+                        2019年创立公司,作品远销海外,让绒花走上国际舞台。
+                    </p>
+                </div>
+            </article>
+
+            <!-- 蔡志伟 -->
+            <article class="inheritor-card">
+                <img src="images/蔡志伟1.jpg" alt="蔡志伟" class="card-img">
+                <div class="card-text">
+                    <h3 class="card-name">蔡志伟</h3>
+                    <p class="card-title">北京民间工艺大师<br>北京绒鸟（绒花）非遗第六代传承人</p>
+                    <p class="card-desc">
+                        2002年拜北京绒花第五代传人高振兴为师，2025年获市级代表性传承人。<br>
+                        作品《双孔雀》获“中艺杯”银奖，《国色天香》获“工美杯”铜奖。<br>
+                        2022年为冬奥会“唐花飞雪”礼服制作帽饰绒花，让绒花首次登上世界舞台。<br>
+                        探索绒花创新，推动传统技艺融入现代生活。
+                    </p>
+                </div>
+            </article>
+
+            <!-- 刘梅 & 征珊珊 -->
+            <article class="inheritor-card">
+                <img src="images/刘梅.jpg" alt="刘梅 征珊珊" class="card-img">
+                <div class="card-text">
+                    <h3 class="card-name">刘梅 征珊珊</h3>
+                    <p class="card-title">扬州绒花传承人<br>绒花复兴者</p>
+                    <p class="card-desc">
+                        刘梅15岁学绒花打尖,后习全套技艺;1990年代收购江都丝绒工艺厂,转向海外销售“复活节”丝绒小鸡。<br>
+                        女儿征珊珊返乡后，将传统技艺与电商、现代审美结合，设计鬓头花、耳坠、车饰等产品，<br>
+                        让千年绒花融入当代生活，赋予新内涵。
+                    </p>
+                </div>
+            </article>
+        </div>
+
+    <footer>
+        <p>© 2025[绒华物语]绒花工艺工作室</p>
+    </footer>
+    
+
+    <!-- 移动端菜单脚本 -->
+    <script>
+        const menuBtn = document.querySelector('.menu');
+        const navList = document.querySelector('nav ul');
+
+        menuBtn.addEventListener('click', () => {
+            navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+            navList.style.flexDirection = 'column';
+            navList.style.position = 'absolute';
+            navList.style.top = '100px';
+            navList.style.left = '0';
+            navList.style.right = '0';
+            navList.style.background = '#9C4A57';
+            navList.style.padding = '20px';
+            navList.style.gap = '15px';
+        });
+    </script>
+
+    </main>
+</body>
+</html>

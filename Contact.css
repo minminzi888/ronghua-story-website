@@ -1,0 +1,348 @@
+/* 联系我们页面样式 */
+
+/* Banner区域 */
+.contact-banner {
+    background: linear-gradient(rgba(251, 245, 246, 0.7), rgba(156, 74, 87, 0.7)), 
+                url('images/contact背景.jpg') center/cover no-repeat;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding-top: 80px;
+    background-attachment: fixed;
+}
+
+.contact-banner h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-family: "华文中宋", sans-serif;
+    letter-spacing: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contact-banner p {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+}
+
+/* 联系内容区域 */
+.contact-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    background-image: url('images/背景1.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* 联系信息卡片 */
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.info-card .icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #9C4A57, #B8577A);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    letter-spacing: 2px;
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    color: #9C4A57;
+    margin-bottom: 15px;
+    font-family: "华文中宋", sans-serif;
+}
+
+.info-card p {
+    color: #666;
+    line-height: 1.8;
+    margin: 5px 0;
+}
+
+/* 留言板区域 */
+.message-board {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.message-board h2 {
+    font-size: 2rem;
+    color: #9C4A57;
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: "华文中宋", sans-serif;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.title-icon {
+    width: 50px;
+    height: auto;
+}
+
+/* 留言表单 */
+.message-form {
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "宋体", sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #9C4A57;
+    box-shadow: 0 0 0 3px rgba(156, 74, 87, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    display: block;
+    width: 200px;
+    margin: 30px auto 0;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #9C4A57, #B8577A);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    letter-spacing: 2px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(156, 74, 87, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* 留言列表容器 */
+.messages-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 40px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.messages-container h3 {
+    font-size: 1.5rem;
+    color: #9C4A57;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: "华文中宋", sans-serif;
+}
+
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 单条留言样式 */
+.message-item {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #9C4A57;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+.message-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.message-author {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.message-email {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 10px;
+}
+
+.message-time {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.message-content {
+    color: #555;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* 空状态提示 */
+.empty-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+.empty-message::before {
+    content: "留言";
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #9C4A57;
+    margin-bottom: 15px;
+}
+
+/* 成功提示消息 */
+.success-message {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
+    z-index: 1001;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.success-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .contact-banner h1 {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+
+    .contact-banner p {
+        font-size: 1rem;
+    }
+
+    .contact-content {
+        padding: 40px 20px;
+    }
+
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .message-board {
+        padding: 30px 20px;
+    }
+
+    .message-board h2 {
+        font-size: 1.5rem;
+    }
+
+    .title-icon {
+        width: 35px;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+
+    .message-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .message-email {
+        margin-left: 0;
+    }
+}
+
